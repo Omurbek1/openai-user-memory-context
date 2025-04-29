@@ -29,6 +29,10 @@ app.post("/ask", async (req, res) => {
     ];
 
     const answer = await askDeepseek(messages);
+
+    if (!answer) {
+      return res.status(500).json({ error: "Не удалось получить ответ" });
+    }
     res.json({ answer });
   } catch (err) {
     console.error(err.message);
